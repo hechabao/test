@@ -1,0 +1,142 @@
+{% extends 'app/base.html' %}
+{% block title %}电影分析{% endblock %}
+
+{% block content %}
+        <div class="content">
+            
+			<div class="container-fluid">
+					<div class="row">
+							<div class="col-xl-12">
+									<div class="breadcrumb-holder">
+											<h1 class="main-title float-left">电影分析</h1>
+											<ol class="breadcrumb float-right">
+												<li class="breadcrumb-item">Home</li>
+											</ol>
+											<div class="clearfix"></div>
+									</div>
+							</div>
+					</div>
+
+
+					<div class="row">
+					
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+								<div class="card mb-3">
+									<div class="card-header">
+										<i class="fa fa-table"></i> 导演作品数量前20的导演
+									</div>
+										
+									<div class="card-body" id="app1" style="height:300px;width:100%">
+									</div>
+								</div><!-- end card-->					
+							</div>
+
+
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+								<div class="card mb-3">
+									<div class="card-header">
+										<i class="fa fa-table"></i> 电影评分前20的导演
+									</div>
+
+									<div class="card-body" id="app3" style="height:300px;width:100%">
+									</div>
+								</div><!-- end card-->
+							</div>
+
+					</div>
+					
+
+
+
+
+            </div>
+			<!-- END container-fluid -->
+
+		</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="/static/echarts.min.js"></script>
+
+<script>
+var dom = document.getElementById("app1");
+var myChart = echarts.init(dom);
+option = {
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: [
+        {
+            type: 'category',
+            data: {{daoyan_name | safe}},
+            axisTick: {
+                alignWithLabel: true
+            }
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value'
+        }
+    ],
+    series: [
+        {
+            name: '数',
+            type: 'bar',
+            barWidth: '60%',
+            data: {{daoyan_count | safe}}
+        }
+    ]
+};
+
+
+if (option && typeof option === 'object') {
+    myChart.setOption(option);
+}
+</script>
+
+
+<script>
+var dom = document.getElementById("app3");
+var myChart = echarts.init(dom);
+option = {
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+  series: [
+    {
+      name: '评分',
+      type: 'pie',
+      radius: '50%',
+      data: {{pf_dict | safe}},
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }
+  ]
+};
+
+
+if (option && typeof option === 'object') {
+    myChart.setOption(option);
+}
+</script>
+
+
+{% endblock %}

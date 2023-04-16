@@ -1,0 +1,109 @@
+{% extends 'app/base.html' %}
+{% block title %}主页{% endblock %}
+
+{% block content %}
+    	<script src="/static/daping/js/echarts.min.js"></script>
+<div class="content">
+
+        <center>
+    <div class="card-body" style="width:90%">
+        <h2>选择电影</h2>
+        <form action="/yuce" method="POST">
+            <div class="form-group">
+                <label for="name">电影名称</label>
+                <select class="form-control" name="name">
+                    <option value="总票房">总票房</option>
+                    {% for resu in result %}
+                        <option value="{{resu}}">{{resu}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-info">确定</button>
+        </form>
+<br/>
+        {% if datas %}
+            <table class="table table-bordered  mb-15 mt-15" id="divtable">
+					<thead>
+						<tr class="cen">
+                            <th>ID</th>
+                            <th>日期</th>
+                            <th>票房</th>
+						</tr>
+					</thead>
+					<tbody id="group_one">
+                              {% for resu in datas %}
+                              <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ resu.riqi }}</td>
+                                    <td>{{ resu.piaofang }}</td>
+                              </tr>
+                              {% endfor %}
+					</tbody>
+				</table>
+        <br/>
+            <div class="card-body" style="width:95%;height:400px">
+            <div id="app" style="height: 100%;width:100%;float:left;">
+
+            <script>
+            var dom = document.getElementById("app");
+            var myChart = echarts.init(dom);
+
+            var option = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                        type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        data: {{riqi | safe}},
+                        axisTick: {
+                            alignWithLabel: true
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value'
+                    }
+                ],
+                series: [
+                    {
+                        name: '数量',
+                        type: 'line',
+                        barWidth: '60%',
+                        data: {{piaofang | safe}},
+                        itemStyle: {
+                                normal: {
+                                    color: '#d7a02b'
+                                    },
+                                }
+                    }
+                ]
+            };
+
+            if (option && typeof option === 'object') {
+                myChart.setOption(option);
+            }
+
+        </script>
+        </div>
+
+        {% endif %}
+
+<br/>
+    <br/>
+    </div>
+    </div>
+        </center>
+
+{% endblock %}
+
