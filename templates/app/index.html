@@ -1,0 +1,109 @@
+{% extends 'app/base.html' %}
+{% block title %}主页{% endblock %}
+
+{% block content %}
+
+<div class="content">
+
+			<div class="container-fluid">
+				<div class="row">
+						<div class="col-xl-12">
+								<div class="breadcrumb-holder">
+										<h1 class="main-title float-left">数据</h1>
+										<ol class="breadcrumb float-right">
+											<li class="breadcrumb-item">Home</li>
+										</ol>
+										<div class="clearfix"></div>
+								</div>
+						</div>
+				</div>
+				<!-- end row -->
+
+				<div class="row">
+
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+							<div class="card mb-3">
+								<div class="card-body">
+									<div class="table-responsive">
+									<table id="example1" class="table table-bordered table-hover display">
+										<thead>
+											<tr>
+                                            <th>id</th>
+                                            <th>电影名</th>
+                                            <th>评分</th>
+                                            <th>票房</th>
+                                            <th>短评数</th>
+                                            <th>导演</th>
+                                            <th>编剧</th>
+                                            <th>制片地区</th>
+                                            <th>上映年份</th>
+											<th>收藏</th>
+											</tr>
+										</thead>
+										<tbody>
+                                         {% for resu in results %}
+
+                                            <tr>
+                                                <td>{{ resu.id }}</td>
+                                                <td>{{ resu.movie }}</td>
+                                                <td>{{ resu.score }}</td>
+                                                <td>{{ resu.piaofang }}</td>
+                                                <td>{{ resu.num }}</td>
+                                                <td>{{ resu.short }}</td>
+                                                <td>{{ resu.writer }}</td>
+                                                <td>{{ resu.region }}</td>
+                                                <td>{{ resu.year }}-{{ resu.month }}</td>
+												<td><a onclick="window.alert('收藏成功')" href="/shouchang?id={{ resu.id }}">收藏</a></td>
+                                            </tr>
+                                        {% endfor %}
+										</tbody>
+									</table>
+									</div>
+
+								</div>
+							</div><!-- end card-->
+						</div>
+
+
+				</div>
+
+            </div>
+			<!-- END container-fluid -->
+
+		</div>
+
+{% endblock %}
+
+
+{% block script %}
+<!-- BEGIN Java Script for this page -->
+	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+        <script>
+            $.fn.dataTable.defaults.oLanguage = {
+        "sProcessing": "处理中...",
+        "sLengthMenu": "显示 _MENU_ 项结果",
+        "sZeroRecords": "没有匹配结果",
+        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+        "sInfoPostFix": "",
+        "sSearch": "搜索：",
+        "sUrl": "",
+        "sEmptyTable": "表中数据为空",
+        "sLoadingRecords": "载入中...",
+        "sInfoThousands": ",",
+        "oPaginate": {
+            "sFirst": "首页",
+            "sPrevious": "上页",
+            "sNext": "下页",
+            "sLast": "末页"
+        },
+        "oAria": {
+            "sSortAscending": ": 以升序排列此列",
+            "sSortDescending": ": 以降序排列此列"
+        }
+    }
+
+    </script>
+{% endblock %}

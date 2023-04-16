@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<title>{% block title %}主页{% endblock %}</title>
+		<meta name="description" content="Free Bootstrap 4 Admin Theme | Pike Admin">
+		
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="/static/assets/images/favicon.ico">
+
+		<!-- Bootstrap CSS -->
+		<link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		
+		<!-- Font Awesome CSS -->
+		<link href="/static/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		
+		<!-- Custom CSS -->
+		<link href="/static/assets/css/style.css" rel="stylesheet" type="text/css" />
+		
+		<!-- BEGIN CSS for this page -->
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>
+		<!-- END CSS for this page -->
+		
+</head>
+
+<body class="adminbody">
+
+<div id="main">
+
+	<!-- top bar navigation -->
+	<div class="headerbar">
+
+		<!-- LOGO -->
+        <div class="headerbar-left">
+			<a href="index.html" class="logo"><span>电影票房预测分析</span></a>
+        </div>
+
+        <nav class="navbar-custom">
+                    <ul class="list-inline menu-left mb-0">
+                        <li class="float-left">
+                            <button class="button-menu-mobile open-left">
+								<i class="fa fa-fw fa-bars"></i>
+                            </button>
+                        </li>
+                    </ul>
+
+        </nav>
+
+	</div>
+	<!-- End Navigation -->
+	
+ 
+	<!-- Left Sidebar -->
+	<div class="left main-sidebar">
+	
+		<div class="sidebar-inner leftscroll">
+
+			<div id="sidebar-menu">
+        
+			<ul>
+
+					<li class="submenu">
+						<a class="" href="/index"><i class="fa fa-fw fa-bars"></i><span> 主页 </span> </a>
+                    </li>
+				<li class="submenu">
+					<a class="" href="/keshihua1"><i class="fa fa-fw fa-square"></i><span>可视化 </span> </a>
+				</li>
+				<li class="submenu">
+					<a class="" href="/charts1"><i class="fa fa-fw fa-square"></i><span>电影可视化 </span> </a>
+				</li>
+				<li class="submenu">
+					<a class="" href="/yuce"><i class="fa fa-fw fa-square"></i><span>票房预测 </span> </a>
+				</li>
+				<li class="submenu">
+					<a class="" href="/admin"><i class="fa fa-fw fa-square"></i><span>数据管理 </span> </a>
+				</li>
+                    <li class="submenu">
+						<a class="" href="/loginsout"><i class="fa fa-fw fa-bars"></i><span> 退出登陆 </span> </a>
+                    </li>
+
+            </ul>
+
+            <div class="clearfix"></div>
+
+			</div>
+        
+			<div class="clearfix"></div>
+
+		</div>
+
+	</div>
+	<!-- End Sidebar -->
+
+
+    <div class="content-page">
+	
+	  	{% block content %}
+  		{% endblock %}
+
+    </div>
+	<!-- END content-page -->
+
+
+</div>
+<!-- END main -->
+
+
+
+<script src="/static/assets/js/modernizr.min.js"></script>
+<script src="/static/assets/js/jquery.min.js"></script>
+<script src="/static/assets/js/moment.min.js"></script>
+		
+<script src="/static/assets/js/popper.min.js"></script>
+<script src="/static/assets/js/bootstrap.min.js"></script>
+
+<script src="/static/assets/js/detect.js"></script>
+<script src="/static/assets/js/fastclick.js"></script>
+<script src="/static/assets/js/jquery.blockUI.js"></script>
+<script src="/static/assets/js/jquery.nicescroll.js"></script>
+
+<!-- App js -->
+<script src="/static/assets/js/pikeadmin.js"></script>
+
+
+
+{% block script %}
+<!-- BEGIN Java Script for this page -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+        <script>
+            $.fn.dataTable.defaults.oLanguage = {
+        "sProcessing": "处理中...",
+        "sLengthMenu": "显示 _MENU_ 项结果",
+        "sZeroRecords": "没有匹配结果",
+        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+        "sInfoPostFix": "",
+        "sSearch": "搜索：",
+        "sUrl": "",
+        "sEmptyTable": "表中数据为空",
+        "sLoadingRecords": "载入中...",
+        "sInfoThousands": ",",
+        "oPaginate": {
+            "sFirst": "首页",
+            "sPrevious": "上页",
+            "sNext": "下页",
+            "sLast": "末页"
+        },
+        "oAria": {
+            "sSortAscending": ": 以升序排列此列",
+            "sSortDescending": ": 以降序排列此列"
+        }
+    }
+
+    </script>
+{% endblock %}
+
+	<!-- Counter-Up-->
+	<script src="/static/assets/plugins/waypoints/lib/jquery.waypoints.min.js"></script>
+	<script src="/static/assets/plugins/counterup/jquery.counterup.min.js"></script>			
+
+	<script>
+		$(document).ready(function() {
+			// data-tables
+			$('#example1').DataTable();
+					
+			// counter-up
+			$('.counter').counterUp({
+				delay: 10,
+				time: 600
+			});
+		} );		
+	</script>
+
+<!-- END Java Script for this page -->
+
+</body>
+</html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>电影票房可视化分析大屏</title>
+	<link rel="stylesheet" href="/static/daping/icon/iconfont.css">
+	<script src="/static/daping/js/jquery.min.js"></script>
+	<script src="/static/daping/js/echarts.min.js"></script>
+
+	
+
+</head>
+<body>
+<div class="container-header">
+    <ul class="nowTime">
+        <li></li>
+        <li></li>
+    </ul>
+    <div class="location">
+        <i class="icon iconfont icon-buoumaotubiao23"></i>
+        <span class="areaName"></span>
+    </div>
+    <h3><a href="/index">电影票房可视化分析大屏</a></h3>
+</div>
+<div class="container-content">
+    <div class="top">
+		<div class="count-base" >
+			<div class="com-count-title">各类型电影</div>
+			<div class="com-screen-content">
+				<div id="main1" style="width:350px;height:300px;"></div>
+			</div>
+            <script>
+    var dom = document.getElementById("main1");
+    var myChart = echarts.init(dom);
+
+    var option = {
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        type : 'scroll',
+        data : {{itype_list_key | safe}},
+      },
+      series: [
+        {
+          name: '电影数',
+          type: 'pie',
+          radius: '50%',
+          data: {{itype_list | safe}},
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    };
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+
+    </script>
+
+
+			<span class="left-top"></span>
+			<span class="right-top"></span>
+			<span class="left-bottom"></span>
+			<span class="right-bottom"></span>
+		</div>
+		<div class="count-resource q1">
+			<div class="com-count-title">票房前十电影</div>
+			<div class="com-screen-content2">
+				<div class="com-screen-content">
+				 <div id="main211" style="width:350px;height:300px;"></div>
+				</div>
+                <script>
+var dom = document.getElementById("main211");
+var myChart = echarts.init(dom);
+
+var option = {
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: [
+        {
+            type: 'category',
+            data: {{pingfen_name | safe}},
+            axisTick: {
+                alignWithLabel: true
+            },
+             axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#ffffff'
+                }
+             }
+
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value',
+           axisLabel : {
+                    textStyle: {
+                        color: '#ffffff'
+                    }
+                }
+
+        }
+    ],
+    series: [
+        {
+            name: '票房',
+            type: 'bar',
+            barWidth: '60%',
+            data: {{pingfen_count | safe}}
+        }
+    ]
+};
+
+if (option && typeof option === 'object') {
+    myChart.setOption(option);
+}
+
+</script>
+				<span class="left-top"></span>
+				<span class="right-top"></span>
+				<span class="left-bottom"></span>
+				<span class="right-bottom"></span>
+			</div>
+		</div>
+		<div class="count-resource q2">
+			<div class="com-count-title">评价人数前十电影</div>
+			<div class="com-screen-content">
+			 <div id="main3" style="width:350px;height:300px;">
+                  <script>
+        var dom = document.getElementById("main3");
+        var myChart = echarts.init(dom);
+
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: {{num_name | safe}},
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#ffffff'
+                        }
+                     }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#ffffff'
+                        }
+                     }
+                }
+            ],
+            series: [
+                {
+                    name: '数量',
+                    type: 'line',
+                    barWidth: '60%',
+                    data: {{num_count | safe}},
+                    itemStyle: {
+                            normal: {
+                                color: '#d7a02b'
+                                },
+                            }
+                }
+            ]
+        };
+
+        if (option && typeof option === 'object') {
+            myChart.setOption(option);
+        }
+
+        </script>
+             </div>
+			</div>
+			<span class="left-top"></span>
+			<span class="right-top"></span>
+			<span class="left-bottom"></span>
+			<span class="right-bottom"></span>
+		</div>
+    </div>
+	<!--青岛研锦网络科技有限公司   版权所有-->
+	<div class="mid">
+		<div class="count-share w1" >
+			<div class="com-count-title">总票房时间图</div>
+			<div class="com-screen-content">
+                <div id="main32" style="width:550px;height:300px;">
+                </div>
+                <script>
+var dom = document.getElementById("main32");
+var myChart = echarts.init(dom);
+
+var option = {
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: [
+        {
+            type: 'category',
+            data: {{shangying_list | safe}},
+            axisTick: {
+                alignWithLabel: true
+            },
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#ffffff'
+                }
+             }
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#ffffff'
+                }
+             }
+        }
+    ],
+    series: [
+        {
+            name: '票房',
+            type: 'line',
+            barWidth: '60%',
+            data: {{shangying_count | safe}}
+        }
+    ]
+};
+
+if (option && typeof option === 'object') {
+    myChart.setOption(option);
+}
+
+</script>
+			</div>
+			<span class="left-top"></span>
+			<span class="right-top"></span>
+			<span class="left-bottom"></span>
+			<span class="right-bottom"></span>
+		</div>
+		<div class="count-share w2" >
+			<div class="com-count-title">评分和时长的关系</div>
+			<div class="com-screen-content">
+			 <div id="main5" style="margin-top:20px;width:600px;height:300px;"></div>
+                <script type="text/javascript">
+
+var dom1 = document.getElementById("main5");
+var myChart1 = echarts.init(dom1);
+
+var option1 =  {
+      xAxis: {axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#ffffff'
+                }
+             }},
+      yAxis: {axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#ffffff'
+                }
+             }},
+         grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '15%',
+    top: '5%',
+    containLabel: true
+   },
+       tooltip: {
+                    /*返回需要的信息*/
+                    formatter: function(param) {
+                        var value = param.value;
+                        return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 16px;padding-bottom: 7px;margin-bottom: 7px;"> '+ '(评分'+ value[0] +  ' 片长:' + value[1] + ' 名称:' + value[2] + ')' +
+                            '</div>';
+                    }
+                },
+  series: [
+    {
+      symbolSize: 10,
+      data: {{score_time | safe}},
+      type: 'scatter'
+    }
+  ]
+};
+
+if (option1 && typeof option1 === 'object') {
+    myChart1.setOption(option1);
+}
+
+</script>
+			</div>
+			<span class="left-top"></span>
+			<span class="right-top"></span>
+			<span class="left-bottom"></span>
+			<span class="right-bottom"></span>
+		</div>
+	</div>
+	
+	<div class="bottom">
+		<div class="count-topic e1" >
+			<div class="com-count-title">各星级评分人数</div>
+			<div class="com-screen-content">
+			<div id="main6" style="margin-top:20px;width:600px;height:300px;"></div>
+                <script>
+        var dom = document.getElementById("main6");
+        var myChart = echarts.init(dom);
+
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: {{star_name | safe}},
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#ffffff'
+                        }
+                     }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#ffffff'
+                        }
+                     }
+                }
+            ],
+            series: [
+                {
+                    name: '数量',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: {{star_count | safe}},
+                    itemStyle: {
+                            normal: {
+                                color: '#cca272'
+                                },
+                            }
+                }
+            ]
+        };
+
+        if (option && typeof option === 'object') {
+            myChart.setOption(option);
+        }
+
+        </script>
+
+			</div>
+			<span class="left-top"></span>
+			<span class="right-top"></span>
+			<span class="left-bottom"></span>
+			<span class="right-bottom"></span>
+		</div>
+		<div class="count-topic e2" >
+			<div class="com-count-title">短评数前十电影</div>
+			<div class="com-screen-content">
+			 <div id="main7" style="margin-top:20px;width:600px;height:300px;"></div>
+                <script>
+        var dom = document.getElementById("main7");
+        var myChart = echarts.init(dom);
+
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: {{short_name | safe}},
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#ffffff'
+                        }
+                     }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#ffffff'
+                        }
+                     }
+                }
+            ],
+            series: [
+                {
+                    name: '数量',
+                    type: 'line',
+                    barWidth: '60%',
+                    data: {{short_count | safe}},
+                    itemStyle: {
+                            normal: {
+                                color: '#74608f'
+                                },
+                            }
+                }
+            ]
+        };
+
+        if (option && typeof option === 'object') {
+            myChart.setOption(option);
+        }
+
+        </script>
+			</div>
+
+			<span class="left-top"></span>
+			<span class="right-top"></span>
+			<span class="left-bottom"></span>
+			<span class="right-bottom"></span>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+
+<script type="text/javascript">
+//根据不同的分辨率调用不同的css和js
+	if(window.screen.width>=1600){
+		document.write("<link href='/static/daping/css/test-1920.css' rel='stylesheet' type='text/css'>");
+	}
+	else if(window.screen.width<1600&&window.screen.width>=1280){
+		document.write("<link href='/static/daping/css/test-1280.css' rel='stylesheet' type='text/css'>");
+	}else{
+	document.write("<link href='/static/daping/css/test-1024.css' rel='stylesheet' type='text/css'>");
+	}
+</script>
+<script type="text/javascript"> 
+	  function autoScroll(obj){  
+			$(obj).find("ul").animate({  
+				marginTop : "-39px"  
+			},500,function(){  
+				$(this).css({marginTop : "0px"}).find("li:first").appendTo(this);  
+			})  
+		}  
+		$(function(){  
+			setInterval('autoScroll(".maquee")',2000);
+		}) 
+</script>
+<script>
+    //获取当前时间
+function getNowFormatDate() {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    var Hour =  date.getHours();       // 获取当前小时数(0-23)
+    var Minute =  date.getMinutes();     // 获取当前分钟数(0-59)
+    var Second = date.getSeconds();     // 获取当前秒数(0-59)
+    var show_day=new Array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
+    var day=date.getDay();
+    if (Hour<10) {
+        Hour = "0" + Hour;
+    }
+    if (Minute <10) {
+        Minute = "0" + Minute;
+    }
+    if (Second <10) {
+        Second = "0" + Second;
+    }
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = '<div><p>'+year + '年' + month +'月' + strDate+'号</p><p>'+show_day[day]+'</p></div>';
+    var HMS = Hour + ':' + Minute +':' + Second;
+	var temp_time = year+'-'+month+'-'+strDate+' '+HMS;
+    $('.nowTime li:nth-child(1)').html(HMS);
+    $('.nowTime li:nth-child(2)').html(currentdate);
+	//$('.topRec_List li div:nth-child(3)').html(temp_time);
+    setTimeout(getNowFormatDate,1000);//每隔1秒重新调用一次该函数
+}
+getNowFormatDate()
+</script>
+</body>
+</html>
